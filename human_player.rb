@@ -1,31 +1,27 @@
 class HumanPlayer
 
-  attr_reader :name
+  attr_reader :name, :symbol
 
-  def initialize(name)
+  def initialize(name, symbol)
     @name = name
+    @symbol = symbol
   end
 
-  def get_move
-    puts "Where would you like to place an X?"
+  def get_move(board)
+
+    puts "#{name}, enter a grid number to place an '#{symbol}': "
     input = gets.chomp
-    input_array = input.split(', ')
-    move = [input_array[0].to_i, input_array[1].to_i]
-  end
 
-  def display(board)
-    pos = board.grid.flatten
-    pos.each_with_index do |ele, idx|
-      if ele == nil
-        pos[idx] = ' '
-      end
+    if valid_move?(input, board)
+      input.to_i - 1
+    else
+      system "clear"
+      puts "Please enter a valid grid number!"
+      get_move(board)
     end
-
-    puts "#{pos[0]} | #{pos[1]} | #{pos[2]}"
-    puts "_________"
-    puts "#{pos[3]} | #{pos[4]} | #{pos[5]}"
-    puts "_________"
-    puts "#{pos[6]} | #{pos[7]} | #{pos[8]}"
   end
 
+  def valid_move?(input, board)
+    input.to_i.to_s == input && input.to_i.between?(1,9) && board.empty?(input.to_i - 1)
+  end
 end

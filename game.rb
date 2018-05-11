@@ -1,74 +1,79 @@
 require_relative 'board'
-require_relative 'human_player'
-require_relative 'computer_player'
 require_relative 'welcome'
-require_relative 'pick_symbol'
+require_relative 'create_players'
 
 class Game
 
-  attr_accessor :current_player, :player_one, :player_two, :board, :current_mark
+  attr_reader :current_player, :player_one, :player_two
+  attr_accessor :board, :last_turn, :flag
 
-  def initialize(player_one, player_two)
-    @player_one = player_one
-    @player_two = player_two
+  def initialize(players)
+    @player_one = players[0]
+    @player_two = players[1]
     @board = Board.new
     @current_player = @player_one
-    @current_mark = :X
+    @last_turn = nil
   end
 
   def play
     until board.over?
       play_turn
     end
-    player_one.display(board)
-    if board.winner == :X
-      puts "#{player_one.name} won!"
-    elsif board.winner == :O
-      puts "#{player_one.name} lost!"
+    system "clear"
+    winning_symbol = board.winner
+    if player_one.symbol == winning_symbol
+      board.display_winner
+      puts "#{player_one.name} won the game!"
+    elsif player_two.symbol == winning_symbol
+      board.display_winner
+      puts "#{player_two.name} won the gam!"
     else
+      board.display
       puts "It's a tie!"
     end
   end
 
   def play_turn
-    current_player.display(board)
-    move = current_player.get_move
-    board.place_mark(move, @current_mark)
+    board.display
+    puts last_turn if last_turn
+    move = current_player.get_move(board)
+    system "clear"
+    board.place_mark(move, current_player.symbol)
+    self.last_turn = "#{current_player.name} placed an '#{current_player.symbol}' in grid #{move + 1}"
     switch_players!
   end
 
   def switch_players!
     if @current_player == @player_one
       @current_player = @player_two
-      @current_mark = :O
     else
       @current_player = @player_one
-      @current_mark = :X
     end
   end
-
 end
 
-if __FILE__ == $PROGRAM_NAME
+def run
   welcome
   while true
     print "Enter number of players: "
-    number = gets.chomp.to_i
-    puts
-    if number == 1
-      pick_symbol(1)
-    elsif number == 2
-      pick_symbol(2)
-    elsif number == 0
-
+    number = gets.chomp
+    if number.to_i == 1
+      players = create_players(1)
+      break
+    elsif number.to_i == 2
+      players = create_players(2)
+      break
+    elsif number.to_i == 0 && number == "0"
+      players = create_players(0)
+      break
     else
       puts "Please enter 1 or 2"
     end
   end
-
-  human = HumanPlayer.new(name)
-  computer = ComputerPlayer.new('Hal')
-
-  new_game = Game.new(human, computer)
+  new_game = Game.new(players)
   new_game.play
+end
+
+if __FILE__ == $PROGRAM_NAME
+  run
 end

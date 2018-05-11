@@ -1,5 +1,2 @@
-1. player options (0, 1, 2)
-2. difficulty options if 1 player (easy (random moves) , medium (all defensive), hard (defensive and offensive))
-
-Chris (Player 1) enter a grid number to place an X
-Hal (Computer 1) placed an O in grid number 3 (only for computer)
+1. Enter Players O
+2. Refactor and remove repetitions 
