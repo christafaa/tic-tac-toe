@@ -15,7 +15,7 @@ def create_players(number_of_players)
       computer_symbol = 'X'
     end
 
-    player_two = ComputerPlayer.new("Joshua (Computer)", computer_symbol, difficulty)
+    player_two = ComputerPlayer.new("Joshua (Computer)", computer_symbol, difficulty, false)
 
     [player_one, player_two]
 
@@ -41,9 +41,9 @@ def create_players(number_of_players)
     [player_one, player_two]
 
   elsif number_of_players == 0
-    player_one = ComputerPlayer.new("Joshua", "X")
-    player_two = ComputerPlayer.new("Hal", "O")
-    puts [player_one, player_two]
+    player_one = ComputerPlayer.new("Joshua", "X", "hard", true)
+    player_two = ComputerPlayer.new("Hal", "O", "hard", true)
+    [player_one, player_two]
   end
 end
 

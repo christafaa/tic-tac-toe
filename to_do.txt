@@ -1,2 +1,1 @@
-1. Enter Players O
-2. Refactor and remove repetitions 
+1. Refactor and remove repetitions 

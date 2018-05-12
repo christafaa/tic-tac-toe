@@ -15,7 +15,6 @@ class HumanPlayer
     if valid_move?(input, board)
       input.to_i - 1
     else
-      system "clear"
       puts "Please enter a valid grid number!"
       get_move(board)
     end
