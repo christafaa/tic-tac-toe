@@ -19,7 +19,7 @@ def create_players(number_of_players)
     player_one = HumanPlayer.new(player_one_name, player_one_symbol)
 
     player_two_name = enter_name("Player 2")
-    player_two_symbol = symbol == "X" ? "O" : "X"
+    player_two_symbol = player_one_symbol == "X" ? "O" : "X"
 
     puts "#{player_two_name} you are '#{player_two_symbol}'"
 
