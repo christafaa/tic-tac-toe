@@ -5,7 +5,7 @@ Tic Tac Toe Game for Terminal
 This Tic Tac Toe game has 3 gameplay options:<br/>
 1 player (human player vs computer player)<br/>
 2 players (human player vs human player)<br/>
-0 players (computer player vs computer player) https://www.youtube.com/watch?v=F7qOV8xonfY<br/>
+0 players (computer player vs computer player) <a href="https://www.youtube.com/watch?v=F7qOV8xonfY" target="blank">https://www.youtube.com/watch?v=F7qOV8xonfY</a> <br/>
 
 1 player mode has 3 difficulty options:<br/>
 easy: computer player will select random available positions.<br/>
