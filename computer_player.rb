@@ -7,11 +7,7 @@ class ComputerPlayer
     @symbol = symbol
     @difficulty = difficulty
     @delay = delay
-    if symbol == "X"
-      @opposing_symbol = "O"
-    else
-      @opposing_symbol = "X"
-    end
+    @opposing_symbol = symbol == "X" ? "O" : "X"
   end
 
   def get_move(board)
@@ -23,25 +19,19 @@ class ComputerPlayer
   end
 
   def easy_move(board)
-    moves = []
-    (0..8).each {|pos| moves << pos if board.grid[pos] != "X" && board.grid[pos] != "O"}
-    moves.sample
+    get_moves(board).sample
   end
 
   def medium_move(board)
-    moves = []
-    (0..8).each {|pos| moves << pos if board.grid[pos] != "X" && board.grid[pos] != "O"}
-
+    moves = get_moves(board)
     threat_move = check_moves(board, moves, opposing_symbol)
-    return threat_move if threat_move
-    moves.sample
+    threat_move ? threat_move : moves.sample
   end
 
   def hard_move(board)
     sleep(3) if delay
 
-    moves = []
-    (0..8).each {|pos| moves << pos if board.grid[pos] != "X" && board.grid[pos] != "O"}
+    moves = get_moves(board)
 
     return 4 if moves.include?(4)
 
@@ -50,6 +40,12 @@ class ComputerPlayer
     threat_move = check_moves(board, moves, opposing_symbol)
     return threat_move if threat_move
     moves.sample
+  end
+
+  def get_moves(board)
+    moves = []
+    (0..8).each {|pos| moves << pos if board.grid[pos] != "X" && board.grid[pos] != "O"}
+    moves
   end
 
   def check_moves(board, moves, symbol)

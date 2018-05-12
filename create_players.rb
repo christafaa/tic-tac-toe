@@ -3,36 +3,23 @@ require_relative 'human_player'
 
 def create_players(number_of_players)
   if number_of_players == 1
-    print "Player 1, enter your name: "
-    name = gets.chomp
+    name = enter_name("Player 1")
     difficulty = select_difficulty
     symbol = select_symbol(name)
     player_one = HumanPlayer.new(name, symbol)
-
-    if symbol == 'X'
-      computer_symbol = 'O'
-    else
-      computer_symbol = 'X'
-    end
+    computer_symbol = symbol == "X" ? "O" : "X"
 
     player_two = ComputerPlayer.new("Joshua (Computer)", computer_symbol, difficulty, false)
 
     [player_one, player_two]
 
   elsif number_of_players == 2
-    print "Player 1, enter your name: "
-    player_one_name = gets.chomp
+    player_one_name = enter_name("Player 1")
     player_one_symbol = select_symbol(player_one_name)
     player_one = HumanPlayer.new(player_one_name, player_one_symbol)
 
-    print "Player 2, enter your name: "
-    player_two_name = gets.chomp
-
-    if player_one_symbol == 'X'
-      player_two_symbol = 'O'
-    else
-      player_two_symbol = 'X'
-    end
+    player_two_name = enter_name("Player 2")
+    player_two_symbol = symbol == "X" ? "O" : "X"
 
     puts "#{player_two_name} you are '#{player_two_symbol}'"
 
@@ -45,6 +32,11 @@ def create_players(number_of_players)
     player_two = ComputerPlayer.new("Hal", "O", "hard", true)
     [player_one, player_two]
   end
+end
+
+def enter_name(placeholder)
+  print "#{placeholder}, enter your name: "
+  gets.chomp
 end
 
 def select_symbol(name)

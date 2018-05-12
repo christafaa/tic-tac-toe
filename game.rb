@@ -44,16 +44,11 @@ class Game
   end
 
   def switch_players!
-    if @current_player == @player_one
-      @current_player = @player_two
-    else
-      @current_player = @player_one
-    end
+    @current_player == @player_one ? @current_player = @player_two : @current_player = @player_one
   end
 end
 
 def run
-  welcome
   while true
     print "Enter number of players: "
     number = gets.chomp
@@ -72,8 +67,22 @@ def run
   end
   new_game = Game.new(players)
   new_game.play
+  play_again
+end
+
+def play_again
+  print "Want to play again? "
+  answer = gets.chomp.downcase
+
+  if answer != "yes" && answer != "no"
+    puts "Invalid input!"
+    play_again
+  else
+    answer == "yes" ? run : exit
+  end
 end
 
 if __FILE__ == $PROGRAM_NAME
+  welcome
   run
 end
