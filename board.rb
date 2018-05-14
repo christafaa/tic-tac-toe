@@ -77,11 +77,7 @@ class Board
 
   def display_computer
     moves = grid.map do |move|
-      if move.to_i == move
-        " "
-      else
-        move
-      end
+      move.to_i == move ? " " : move
     end
 
     puts
