@@ -75,6 +75,30 @@ class Board
     puts "==================================="
   end
 
+  def display_computer
+    moves = grid.map do |move|
+      if move.to_i == move
+        " "
+      else
+        move
+      end
+    end
+
+    puts
+    puts "         |         |     "
+    puts "    #{moves[0]}    |    #{moves[1]}    |    #{moves[2]}    "
+    puts "         |         |     "
+    puts " --------------------------- "
+    puts "         |         |     "
+    puts "    #{moves[3]}    |    #{moves[4]}    |    #{moves[5]}    "
+    puts "         |         |     "
+    puts " --------------------------- "
+    puts "         |         |     "
+    puts "    #{moves[6]}    |    #{moves[7]}    |    #{moves[8]}    "
+    puts "         |         |     "
+    puts "==================================="
+  end
+
   def display_winner
     puts
     puts "           |           |     "

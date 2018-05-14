@@ -29,7 +29,7 @@ class ComputerPlayer
   end
 
   def hard_move(board)
-    sleep(3) if delay
+    sleep(2) if delay
 
     moves = get_moves(board)
 

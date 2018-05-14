@@ -4,7 +4,7 @@ require_relative 'create_players'
 
 class Game
 
-  attr_reader :current_player, :player_one, :player_two
+  attr_reader :current_player, :player_one, :player_two, :is_two_comps
   attr_accessor :board, :last_turn, :flag
 
   def initialize(players)
@@ -13,6 +13,7 @@ class Game
     @board = Board.new
     @current_player = @player_one
     @last_turn = nil
+    @is_two_comps = @player_one.class == ComputerPlayer && @player_two.class == ComputerPlayer
   end
 
   def play
@@ -34,7 +35,7 @@ class Game
   end
 
   def play_turn
-    board.display
+    is_two_comps ? board.display_computer : board.display
     puts last_turn if last_turn
     move = current_player.get_move(board)
     system "clear"
